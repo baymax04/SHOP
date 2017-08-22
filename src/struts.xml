@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	
+	<constant name="struts.custom.i18n.resources" value="soft863"/>
+	
+	<!-- 苏佳良 拦截器  start-2016.01.27 -->
+	<package name="default" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="myinterceptor" 
+            	class="memberLogin.LoginInterceptor">
+            </interceptor>
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="defaultStack" />
+                <interceptor-ref name="myinterceptor" />
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="login" type="chain">
+			<param name="namespace">/testz</param>
+			<param name="actionName">zhang</param>
+			</result>
+        </global-results>
+	</package>
+	<!-- 苏佳良 拦截器 end-2016.01.28 -->
+	
+	<!-- 张飞 首页展示 start-2016.01.27 -->
+	<package name="zhangfei" namespace="/testz" extends="struts-default">
+	<action name="zhang" class="Firstpage.Servlet" method="list">
+		<result name="success">/firstpage.jsp</result>
+	</action>
+	
+	<action name="zhang2" class="Firstpage.Servlet" method="list2">
+		<result name="success2">/firstpagexinxi.jsp</result>
+	</action>
+	</package>
+	<!-- 张飞 首页展示 end-2016.01.28 -->
+	
+	<!-- 尚佳铮 购物车  start-2016.01.27 -->
+	<package name="shop" namespace="/shop" extends="default">
+        <!--default-interceptor-ref name="mydefault" / -->
+		<action name="shop_*" class="Canseelight.ShopCar" method="{1}">
+			<result name="success">/shoplogin.jsp</result>
+			<result name="list">/shopCar.jsp</result>
+			<result name="orderView">/shopOrder.jsp</result>
+			<result name="createOrder">/shopOrderid.jsp</result>
+			<result name="input">/shopOrder.jsp</result>
+		</action>
+	</package>
+	<!-- 尚佳铮 购物车 end-2016.01.30 -->
+	
+	<!-- 张帅 会员注册/修改 start-2016.01.27 -->
+	<package name="huiyuan" namespace="/" extends="default">      
+		<action name="user_*" class="huiyuan.MemberManageStruts" method="{1}">
+			<result name="success" type="chain">
+			<param name="namespace">/testz</param>
+			<param name="actionName">zhang</param>
+			</result>
+			<result name="no success">/zhuce.jsp</result>
+			<result name="input">/zhuce.jsp</result>
+		</action>
+		<action name="check"  class="huiyuan.MemberManageStruts" method="check">
+        </action>
+   </package>  
+   <package name="huiyuan1" namespace="/" extends="default" >
+        <default-interceptor-ref name="mydefault"/>
+		<action name="updateview" class="huiyuan.MemberManageStruts" method="updateview">
+			<result name="success">/huiyuan.jsp</result>
+		</action>
+		<action name="use_*" class="huiyuan.MemberManageStruts" method="{1}">
+			<result name="success" type="chain">
+			<param name="namespace">/testz</param>
+			<param name="actionName">zhang</param>
+			</result>
+		    <result name="no success">/huiyuan.jsp</result>
+		    <result name="input">/huiyuan.jsp</result>
+		</action>
+		
+	</package>
+	<!-- 张帅 会员注册/修改 end- -->
+	
+	<!-- 常丽美 公告管理 start-2016.01.27 -->
+	<package name="Notice" namespace="" extends="struts-default">
+  	    <action name="view"  class="Notice.NoticeAction" method="noticeview">
+    	      <result name="noticeview">/noticeview.jsp</result>	    	
+    	</action>
+	    <action name="noticelist"  class="Notice.NoticeAction" method="noticelist">
+	          <result name="noticelist">/noticelist.jsp</result>
+   	          <result name="no success">/index.jsp</result>
+	    </action>
+    </package>
+	<!-- 常丽美 公告管理 end- -->
+	
+	<!-- 苏佳良 会员登录  start-2016.01.27 -->
+	<include file="loginstruts.xml"/>
+	<!-- 苏佳良 会员登录 end-2016.01.29 -->
+	
+	<!-- 苏佳良 订单管理  start-2016.01.27 -->
+	<include file="orderstruts.xml"/>
+	<!-- 苏佳良 订单管理 end-2016.01.31 -->
+	
+</struts>

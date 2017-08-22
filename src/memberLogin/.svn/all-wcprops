@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/20151026java/!svn/ver/1204/shop/group6/trunk/Fshop6/src/memberLogin
+END
+package_en_US.properties
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/20151026java/!svn/ver/1204/shop/group6/trunk/Fshop6/src/memberLogin/package_en_US.properties
+END
+LoginAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/20151026java/!svn/ver/1077/shop/group6/trunk/Fshop6/src/memberLogin/LoginAction.java
+END
+LoginInterceptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/20151026java/!svn/ver/685/shop/group6/trunk/Fshop6/src/memberLogin/LoginInterceptor.java
+END
+package_zh_CN.properties
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/20151026java/!svn/ver/1204/shop/group6/trunk/Fshop6/src/memberLogin/package_zh_CN.properties
+END
+LoginService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/20151026java/!svn/ver/1077/shop/group6/trunk/Fshop6/src/memberLogin/LoginService.java
+END

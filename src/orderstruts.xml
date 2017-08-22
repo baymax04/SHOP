@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="order" namespace="/" extends="default">
+        <default-interceptor-ref name="mydefault" />
+		<action name="orderView">
+			<result>/WEB-INF/order.jsp</result>
+		</action>
+		<action name="orderDetail" class="memberOrder.OrderAction" method="details">
+			<result name="success">/WEB-INF/orderDetail.jsp</result>
+		</action>
+	</package>
+	
+	<package name="jsonorder" namespace="/" extends="json-default">
+		<action name="orderList" class="memberOrder.OrderAction">
+			<result name="success" type="json">
+				<param name="excludeProperties">
+                </param>
+                <param name="includeProperties">
+                list.*, split.*
+                </param>
+			</result>
+		</action>
+    </package>
+    
+</struts>

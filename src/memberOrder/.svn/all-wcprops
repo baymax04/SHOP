@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/20151026java/!svn/ver/1144/shop/group6/trunk/Fshop6/src/memberOrder
+END
+package_en_US.properties
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/20151026java/!svn/ver/1144/shop/group6/trunk/Fshop6/src/memberOrder/package_en_US.properties
+END
+OrderManageDetailsBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/20151026java/!svn/ver/1084/shop/group6/trunk/Fshop6/src/memberOrder/OrderManageDetailsBean.java
+END
+package_zh_CN.properties
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/20151026java/!svn/ver/1142/shop/group6/trunk/Fshop6/src/memberOrder/package_zh_CN.properties
+END
+OrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/20151026java/!svn/ver/1089/shop/group6/trunk/Fshop6/src/memberOrder/OrderAction.java
+END
+OrderManageBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/20151026java/!svn/ver/1084/shop/group6/trunk/Fshop6/src/memberOrder/OrderManageBean.java
+END
+OrderService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/20151026java/!svn/ver/1093/shop/group6/trunk/Fshop6/src/memberOrder/OrderService.java
+END

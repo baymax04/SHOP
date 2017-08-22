@@ -1,0 +1,160 @@
+package huiyuan;
+
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class MemberManageStruts extends ActionSupport {
+	MemberManageService mms = new MemberManageService();
+	MemberManageBean mb;
+	String msg;
+	
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public MemberManageBean getMb() {
+		return mb;
+	}
+
+	public void setMb(MemberManageBean mb) {
+		this.mb = mb;
+	}
+
+	public void validateUpdate(){
+		if(mb.newpassword==null||"".equals(mb.newpassword.trim())){
+			this.addFieldError("c", "密码不能为空!");		
+		}
+		if(!mb.newpassword.equals(mb.renewpassword)){
+			this.addFieldError("d", "密码不统一!请重新输入!");
+		
+		}
+		if(mb.password.equals(mb.newpassword)){
+			this.addFieldError("c", "新密码和旧密码重复!");
+		}	
+		this.jiaoyan();
+		}
+	public void validateZhuce(){
+		if(mb.password==null||"".equals(mb.password.trim())){
+			this.addFieldError("c", "密码不能为空!");		
+		}
+		if(!mb.password.equals(mb.newpassword)){
+			this.addFieldError("d", "密码不统一!请重新输入!");
+			
+		}
+		
+		this.jiaoyan();
+		}
+	
+	public void  jiaoyan(){
+		
+		if(mb.username==null||"".equals(mb.username.trim())){
+			this.addFieldError("a", "用户名不能为空!");
+		}
+		if(mb.truename==null||"".equals(mb.truename.trim())){
+			this.addFieldError("b",  "真实姓名不能为空!");
+		}
+	
+		if("身份证".equals(mb.cardtype)){
+			if(!Pattern.compile("^41\\d{16}$").matcher(mb.cardno.trim()).matches()){
+				this.addFieldError("e", "身份证格式不正确!!");
+			}
+		}
+		if("军官证".equals(mb.cardtype)){
+			if(mb.cardno.length()<6){
+				this.addFieldError("e", "请输入不少于6位数的军官证号码!");
+			}
+		}
+		
+		
+		if(!Pattern.compile("^[0-9a-z]+@(([0-9a-z]+)[.]){1,2}[a-z]{2,3}$").matcher(mb.email.trim()).matches()){
+				this.addFieldError("g", "Email格式不正确!");
+			}
+	}
+	public String zhuce() throws SQLException{
+		int count = mms.zhuce(mb);
+				
+				if (count != 0) {
+					msg = "注册成功";
+					return "success";
+				} else {
+					
+					msg = "注册失败";
+					return "no success";
+				}
+			
+	}
+	 public String updateview(){
+		 ActionContext ctx = ActionContext.getContext();
+		 Map session = ctx.getSession();
+		 String memberid = (String) session.get("memberid");
+		 mb = new MemberManageBean();
+		 mb.setId(memberid);
+		 
+		  mb=mms.updateview(mb).get(0); 
+
+			BigDecimal bd=new BigDecimal(mb.getPostcode());
+			mb.setPostcode(bd.setScale(0).toString());
+		  return"success";  
+	  }
+	 
+	 public String update(){
+		 int count;
+		 
+		 try {
+			count=mms.update(mb);
+			
+			if(count!=0){
+				
+				msg="修改成功";
+				return "success";
+				
+			}else{
+				
+				msg="修改失败";
+				return "no success";
+			}
+		} catch (SQLException e) {
+			
+			return "no success";
+		}
+		 
+		 
+		 
+	 }
+	 
+	 public void check() throws Exception {
+		
+		HttpServletResponse resp = ServletActionContext.getResponse();
+		resp.setCharacterEncoding("utf-8");
+		PrintWriter pw = resp.getWriter();
+		int count = mms.check(mb);
+		if (count != 0) {
+			
+			pw.println("*用户已存在");
+		} else {
+			
+			pw.println("*用户可以注册");
+		}
+
+	}
+	 
+	 
+	 
+	 
+}
